@@ -1,0 +1,227 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 380" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0f1d" />
+      <stop offset="50%" stop-color="#0d1527" />
+      <stop offset="100%" stop-color="#050811" />
+    </linearGradient>
+
+    <!-- Glowing Accent Gradients -->
+    <linearGradient id="primaryGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="50%" stop-color="#818cf8" />
+      <stop offset="100%" stop-color="#c084fc" />
+    </linearGradient>
+
+    <linearGradient id="routeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#10b981" stop-opacity="0.8" />
+    </linearGradient>
+
+    <linearGradient id="alertGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f43f5e" />
+      <stop offset="100%" stop-color="#fbbf24" />
+    </linearGradient>
+
+    <!-- Filters for Glow Effects -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="subtleGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Grid Pattern -->
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.7" stroke-opacity="0.5" />
+      <circle cx="40" cy="40" r="1" fill="#334155" />
+    </pattern>
+  </defs>
+
+  <style>
+    .title-text {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-weight: 800;
+      font-size: 38px;
+      letter-spacing: -0.5px;
+      fill: #ffffff;
+    }
+    .subtitle-text {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      fill: #94a3b8;
+      letter-spacing: 0.5px;
+    }
+    .badge-text {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-weight: 700;
+      font-size: 11px;
+      fill: #38bdf8;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+    .node-label {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 11px;
+      fill: #cbd5e1;
+      font-weight: 600;
+    }
+  </style>
+
+  <!-- 1. Deep Background -->
+  <rect width="1200" height="380" fill="url(#bgGrad)" />
+
+  <!-- 2. Tech Grid -->
+  <rect width="1200" height="380" fill="url(#grid)" />
+
+  <!-- 3. Ambient Background Light Orbs -->
+  <circle cx="150" cy="80" r="140" fill="#38bdf8" opacity="0.07" filter="url(#glow)">
+    <animate attributeName="opacity" values="0.05;0.12;0.05" dur="6s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="1050" cy="280" r="160" fill="#818cf8" opacity="0.08" filter="url(#glow)">
+    <animate attributeName="opacity" values="0.06;0.14;0.06" dur="7s" repeatCount="indefinite" />
+  </circle>
+
+  <!-- 4. Dynamic Interactive Network & Routing Graph (Background Decor) -->
+  <!-- Route Path A: Main Optimal Dispatch Trunk -->
+  <path id="routeA" d="M 80,310 Q 240,240 420,280 T 780,210 T 1120,290" 
+        fill="none" stroke="#334155" stroke-width="2" stroke-dasharray="4,4" />
+  <path d="M 80,310 Q 240,240 420,280 T 780,210 T 1120,290" 
+        fill="none" stroke="url(#routeGrad)" stroke-width="3" stroke-dasharray="12,12" filter="url(#subtleGlow)">
+    <animate attributeName="stroke-dashoffset" from="200" to="0" dur="5s" repeatCount="indefinite" />
+  </path>
+
+  <!-- Route Path B: Dynamic Rerouting Branch on Exception -->
+  <path id="routeB" d="M 420,280 Q 560,110 780,210" 
+        fill="none" stroke="url(#alertGrad)" stroke-width="2.5" stroke-dasharray="8,8" opacity="0.85" filter="url(#subtleGlow)">
+    <animate attributeName="stroke-dashoffset" from="150" to="0" dur="3.5s" repeatCount="indefinite" />
+  </path>
+
+  <!-- Moving Vehicle Dots along routes -->
+  <circle r="5" fill="#38bdf8" filter="url(#glow)">
+    <animateMotion dur="6s" repeatCount="indefinite" rotate="auto">
+      <mpath href="#routeA" />
+    </animateMotion>
+  </circle>
+
+  <circle r="4" fill="#fbbf24" filter="url(#glow)">
+    <animateMotion dur="4s" repeatCount="indefinite" rotate="auto">
+      <mpath href="#routeB" />
+    </animateMotion>
+  </circle>
+
+  <!-- Waypoint Nodes & Telemetry Pulses -->
+  <!-- Depot Node 1 -->
+  <g transform="translate(80, 310)">
+    <circle r="16" fill="#38bdf8" opacity="0.2">
+      <animate attributeName="r" values="8;22;8" dur="3s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.4;0.05;0.4" dur="3s" repeatCount="indefinite" />
+    </circle>
+    <circle r="7" fill="#0f172a" stroke="#38bdf8" stroke-width="2.5" />
+    <circle r="3" fill="#38bdf8" />
+  </g>
+
+  <!-- Midpoint Hub Node -->
+  <g transform="translate(420, 280)">
+    <circle r="18" fill="#818cf8" opacity="0.2">
+      <animate attributeName="r" values="9;24;9" dur="3.5s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.4;0.05;0.4" dur="3.5s" repeatCount="indefinite" />
+    </circle>
+    <circle r="8" fill="#0f172a" stroke="#818cf8" stroke-width="2.5" />
+    <circle r="3.5" fill="#818cf8" />
+  </g>
+
+  <!-- Exception / Reroute Node (Dynamic Pulse) -->
+  <g transform="translate(560, 140)">
+    <circle r="22" fill="#ef4444" opacity="0.25">
+      <animate attributeName="r" values="10;30;10" dur="2.2s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.6;0;0.6" dur="2.2s" repeatCount="indefinite" />
+    </circle>
+    <circle r="9" fill="#0f172a" stroke="#f43f5e" stroke-width="2.5" />
+    <polygon points="560,135 565,145 555,145" fill="#fbbf24" transform="translate(-560, -140)" />
+    <!-- Exception Flag Badge -->
+    <rect x="16" y="-14" width="138" height="26" rx="13" fill="#1e1b4b" stroke="#f43f5e" stroke-width="1" opacity="0.9" />
+    <circle cx="28" cy="-1" r="4" fill="#f43f5e">
+      <animate attributeName="opacity" values="1;0.3;1" dur="1s" repeatCount="indefinite" />
+    </circle>
+    <text x="38" y="3" class="node-label" fill="#fca5a5">Reroute: SLA Exception</text>
+  </g>
+
+  <!-- Destination Node -->
+  <g transform="translate(1120, 290)">
+    <circle r="16" fill="#10b981" opacity="0.2">
+      <animate attributeName="r" values="8;22;8" dur="3s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.4;0.05;0.4" dur="3s" repeatCount="indefinite" />
+    </circle>
+    <circle r="7" fill="#0f172a" stroke="#10b981" stroke-width="2.5" />
+    <circle r="3" fill="#10b981" />
+  </g>
+
+  <!-- 5. FOREGROUND CONTENT (Protected high contrast zone) -->
+  <!-- Backdrop Plate to guarantee foreground text readability -->
+  <rect x="60" y="38" width="1080" height="195" rx="16" fill="#090d16" fill-opacity="0.82" stroke="#1e293b" stroke-width="1.5" />
+
+  <!-- Category Pill Badge -->
+  <g transform="translate(90, 62)">
+    <rect width="250" height="26" rx="13" fill="#0c2340" stroke="#0284c7" stroke-width="1" />
+    <circle cx="16" cy="13" r="4" fill="#38bdf8">
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="2s" repeatCount="indefinite" />
+    </circle>
+    <text x="28" y="17" class="badge-text">DISPATCH &amp; ROUTING TECH</text>
+  </g>
+
+  <!-- Live Status Pulse Pill -->
+  <g transform="translate(930, 62)">
+    <rect width="180" height="26" rx="13" fill="#062e24" stroke="#059669" stroke-width="1" />
+    <circle cx="16" cy="13" r="4" fill="#10b981">
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="1.6s" repeatCount="indefinite" />
+    </circle>
+    <text x="28" y="17" class="badge-text" fill="#34d399">REAL-TIME SYNC • 2026</text>
+  </g>
+
+  <!-- Main Title -->
+  <text x="90" y="132" class="title-text">
+    Real-Time Transport Dispatch &amp; Exception Routing
+  </text>
+
+  <!-- Title Accent Underline -->
+  <rect x="90" y="148" width="380" height="4" rx="2" fill="url(#primaryGlow)" />
+
+  <!-- Subtitle -->
+  <text x="90" y="184" class="subtitle-text">
+    Curated Hub of SaaS Platforms, Solvers, and Open-Source Engines for Dynamic Recalculation &amp; Fleet Orchestration
+  </text>
+
+  <!-- Feature Tags Row -->
+  <g transform="translate(90, 204)">
+    <!-- Pill 1 -->
+    <rect x="0" y="0" width="135" height="20" rx="4" fill="#1e293b" />
+    <text x="10" y="14" font-family="sans-serif" font-size="10" fill="#94a3b8">⚡ Millisecond Solvers</text>
+
+    <!-- Pill 2 -->
+    <rect x="145" y="0" width="150" height="20" rx="4" fill="#1e293b" />
+    <text x="155" y="14" font-family="sans-serif" font-size="10" fill="#94a3b8">📍 Dynamic Insertion</text>
+
+    <!-- Pill 3 -->
+    <rect x="305" y="0" width="165" height="20" rx="4" fill="#1e293b" />
+    <text x="315" y="14" font-family="sans-serif" font-size="10" fill="#94a3b8">⚠️ Exception Resolution</text>
+
+    <!-- Pill 4 -->
+    <rect x="480" y="0" width="155" height="20" rx="4" fill="#1e293b" />
+    <text x="490" y="14" font-family="sans-serif" font-size="10" fill="#94a3b8">🔄 VRPTW / PDPTW Engines</text>
+  </g>
+
+  <!-- Subtle Bottom Border Accent -->
+  <rect x="0" y="377" width="1200" height="3" fill="url(#primaryGlow)" />
+</svg>
